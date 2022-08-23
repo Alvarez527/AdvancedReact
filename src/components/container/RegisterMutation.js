@@ -12,8 +12,8 @@ export const useRegisterMutation = () => {
     const [registerMutation, { data, loading, error }] = useMutation(REGISTER);  
     return {
               registerMutation, 
-              data, 
-              loading, 
-              error 
+              dataRegister: data, 
+              loadingRegister: loading, 
+              errorRegister: error 
           };
 };

@@ -3,14 +3,18 @@ import React, {useContext, Fragment} from 'react'
 import {AppProvider, AppContext} from '../Context'
 import {UserForm} from '../components/userForm/index'
 import {useRegisterMutation} from '../components/container/RegisterMutation.js'
+import {useLoginMutation} from '../components/container/LoginMutation.js'
 
 function NotRegisteredUser() {
 
-  const { login } = useContext(AppContext)
+  const { login: activateAuth } = useContext(AppContext);
 
-  const {registerMutation, data, loading, error } = useRegisterMutation();
+  const {registerMutation, dataRegister, loadingRegister, errorRegister } = useRegisterMutation();
 
-  const onSubmit = ({email, password}) => {
+  const {loginMutation, dataLogin, loadingLogin, errorLogin} = useLoginMutation();
+
+
+  const onSubmitRegister = ({email, password}) => {
     const input = {
       email,
       password
@@ -18,15 +22,42 @@ function NotRegisteredUser() {
 
     const variable = { input }
 
-    registerMutation({ variables: variable }).then(login)
+    registerMutation({ variables: variable }).then(
+      ({data}) => {
+        const {signup} = data;
+        activateAuth(signup);
+      }
+      
+      )
   }
 
-  const errorMsg = error && 'El usuario ya existe o hay algún problema'
+  const errorMsgRegister = errorRegister && 'El usuario ya existe o hay algún problema';
+
+  const onSubmitLogin = ({email, password}) => {
+    const input = {
+      email,
+      password
+    }
+
+    const variable = { input }
+
+    loginMutation({ variables: variable }).then(
+      ({data}) => {
+        const {login} = data;
+        console.log("this is the token: ");
+        console.log(login);
+
+        activateAuth(login);
+      }
+      )
+  }
+
+  const errorMsgLogin = errorLogin && 'Contrasena Incorrecta o Usuario no Existe'
 
   return (
     <Fragment>
-      <UserForm disabled={loading} onSubmit={onSubmit} error={errorMsg} title={'Registrarse'} />
-      <UserForm onSubmit={onSubmit} title={'Iniciar Sesión'} />
+      <UserForm disabled={loadingRegister} onSubmit={onSubmitRegister} error={errorMsgRegister} title={'Registrarse'} />
+      <UserForm didabled={loadingLogin} onSubmit={onSubmitLogin} error={errorMsgLogin} title={'Iniciar Sesión'} />
     </Fragment>
     
   )

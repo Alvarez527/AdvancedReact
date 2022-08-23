@@ -5,14 +5,22 @@ const AppContext = createContext()
 
 const AppProvider = ({children}) => {
 
-    const [isAuth, SetIsAuth] = useState(false)
+    const [isAuth, SetIsAuth] = useState(() => {
+        return window.sessionStorage.getItem('token')
+    });
     
-    const login = () => {
+    const login = (token) => {
         SetIsAuth(true)
+        window.sessionStorage.setItem('token', token);
+    }
+
+    const removeAuth = () => {
+        SetIsAuth(false);
+        window.sessionStorage.removeItem('token');
     }
 
     return (
-        <AppContext.Provider value={{isAuth, login}}>
+        <AppContext.Provider value={{isAuth, login, removeAuth}}>
             {children}
         </AppContext.Provider>
     )
