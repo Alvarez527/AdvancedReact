@@ -1,15 +1,21 @@
 
 import React from 'react'
 import { PhotoCardWithQuery } from '../components/PhotoCardWithQuery/PhotoCardWithQuery'
-import {useParams} from 'react-router'
+import {useParams} from 'react-router-dom'
+import { Layout } from '../components/Layout/index.js'
 
-function Detail({detailId}) {
+function Detail() {
 
+    const {detailId} = useParams();
     console.log('este es el detail Id:' + detailId)
-    const params = useParams()
+   
 
   return (
-    <PhotoCardWithQuery id={params.detailId} />
+    <Layout title={`Fotografia ${detailId}`} >
+      
+      <PhotoCardWithQuery id={detailId} />
+    </Layout>
+    
   )
 }
 

@@ -22,7 +22,7 @@ const ListOfPhotoCards = ({ categoryId }) => {
       {data.photos.map((photo) => {
         return (
           <li key={photo.id}>
-            <Photocard key={photo.id} {...photo} />
+            <Photocard key={photo.id} {...photo}/>
           </li>
         )
       })}

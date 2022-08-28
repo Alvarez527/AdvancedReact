@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Grid, Image } from './styles';
+import propTypes from 'prop-types'
 
 export const ListOfFavs = ({ favs = [] })=> {
     return (
@@ -12,5 +13,15 @@ export const ListOfFavs = ({ favs = [] })=> {
                 ))
             }
         </Grid>
+    )
+}
+
+ListOfFavs.propTypes = {
+
+    favs: propTypes.arrayOf(
+        propTypes.shape({
+            id: propTypes.string.isRequired,
+            src: propTypes.string.isRequired
+        })
     )
 }

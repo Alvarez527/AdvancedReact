@@ -4,6 +4,7 @@ import {AppProvider, AppContext} from '../Context'
 import {UserForm} from '../components/userForm/index'
 import {useRegisterMutation} from '../components/container/RegisterMutation.js'
 import {useLoginMutation} from '../components/container/LoginMutation.js'
+import { Helmet } from 'react-helmet'
 
 function NotRegisteredUser() {
 
@@ -56,6 +57,12 @@ function NotRegisteredUser() {
 
   return (
     <Fragment>
+        <Helmet>
+            <title>
+              Petgram - Ingresar
+            </title>
+            <meta name='description' content='Registrese o Ingrese a su Cuenta'/>
+        </Helmet>
       <UserForm disabled={loadingRegister} onSubmit={onSubmitRegister} error={errorMsgRegister} title={'Registrarse'} />
       <UserForm didabled={loadingLogin} onSubmit={onSubmitLogin} error={errorMsgLogin} title={'Iniciar Sesión'} />
     </Fragment>

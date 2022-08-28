@@ -8,7 +8,8 @@
     "build": "webpack",
     "dev": "webpack-dev-server --history-api-fallback",
     "lint": "standard",
-    "lint-fix": "standard --fix"
+    "lint-fix": "standard --fix",
+    "serve:dev": "webpack --mode development && npx serve dist -s "
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,10 @@
     "@apollo/client": "^3.6.9",
     "graphql": "^16.5.0",
     "intersection-observer": "^0.12.2",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-icons": "^4.4.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
